@@ -15,17 +15,23 @@ import static net.serenitybdd.core.Serenity.setSessionVariable;
 public class JuiceShopSteps extends BaseSteps {
   private final static String _API_USERS_ = "/api/Users/";
   private final static String _REST_USER_LOGIN_ = "/rest/user/login/";
+  private final static String _REST_USER_ = "/rest/user/";
+  private final static String _API_CARDS_ = "/api/Cards/";
+  private final static String _API_ADDRESS_ = "/api/Addresss/";
+  private final static String _REST_ERASURE_ = "/rest/user/erasure-request";
+  private final static String _REST_RESET_PASSWORD = "/rest/user/reset-password";
+
 
   @Step
   public static void getBasketContent(){
-    sendRequest(GET, "INSERT MISSING ENDPOINT HERE" + sessionVariableCalled("basket_id"));
+    sendRequest(GET, "/rest/basket/" + sessionVariableCalled("basket_id"));
   }
 
   @Step
   public static void addItemToBasket(DataTable dataTable) throws IOException {
     BaseRequestBody requestBody = createBodyCustom(dataTable);
     requestBody.addKey("BasketId", sessionVariableCalled("basket_id").toString());
-    sendRequestWithBodyJson(POST, "INSERT MISSING ENDPOINT HERE", requestBody.getBody());
+    sendRequestWithBodyJson(POST, "/api/BasketItems/", requestBody.getBody());
   }
 
   @Step
@@ -97,5 +103,26 @@ public class JuiceShopSteps extends BaseSteps {
       map.replace("email", sessionVariableCalled(RANDOM_EMAIL));
     }
     return map;
+  }
+
+  public static void erasureOfdata(DataTable dataTable) throws IOException {
+    sendRequestWithBodyJson(POST, _REST_ERASURE_, createBody(dataTable));
+
+  }
+
+  public static void addCreditCard(DataTable dataTable) throws IOException {
+    sendRequestWithBodyJson(POST, _API_CARDS_, createBody(dataTable));
+  }
+
+  public static void addAddress(DataTable dataTable) throws IOException {
+    sendRequestWithBodyJson(POST, _API_ADDRESS_, createBody(dataTable));
+  }
+
+  public static void requestDeliveryOption() {
+
+  }
+
+  public static void securityAnswer() throws IOException {
+
   }
 }

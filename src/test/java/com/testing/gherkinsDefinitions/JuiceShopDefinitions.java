@@ -2,6 +2,7 @@ package com.testing.gherkinsDefinitions;
 
 import com.testing.serenitySteps.JuiceShopSteps;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 
 import java.io.IOException;
@@ -41,5 +42,30 @@ public class JuiceShopDefinitions {
   @When("^the user purchases the items using the following data:$")
   public void theUserPurchasesTheItemsUsingTheFollowingData(DataTable dataTable) throws IOException {
     JuiceShopSteps.purchaseTheItems(dataTable);
+  }
+
+  @When("^the user requests erasure of personal data using following data:$")
+  public void theUserRequestsErasureOfPersonalDataUsingFollowingData(DataTable dataTable) throws IOException {
+    JuiceShopSteps.erasureOfdata(dataTable);
+  }
+
+  @When("^the user adds a credit card with following data:$")
+  public void theUserAddsACreditCardWithFollowingData(DataTable dataTable) throws IOException {
+    JuiceShopSteps.addCreditCard(dataTable);
+  }
+
+  @When("^the user adds an address with the following data:$")
+  public void theUserAddsAnAddressWithTheFollowingData(DataTable dataTable) throws IOException {
+    JuiceShopSteps.addAddress(dataTable);
+  }
+
+  @When("^the user requests delivery options$")
+  public void theUserRequestsDeliveryOptions() {
+    JuiceShopSteps.requestDeliveryOption();
+  }
+
+  @And("^the user sends security answer$")
+  public void theUserSendsSecurityAnswer() throws IOException {
+    JuiceShopSteps.securityAnswer();
   }
 }
